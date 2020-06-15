@@ -11,6 +11,27 @@ import Login from '../application/Login';
 
 export default [
     {
+        path: '/user',
+        component: UserLayout,
+        routes: [
+            {
+                path: '/user',
+                exact: true,
+                render: () => {
+                    return <Redirect to={'/user/control'}></Redirect>
+                },
+            },
+            {
+                path: '/user/control',
+                componet: UserControl
+            },
+            {
+                path: '/user/list/clock',
+                component: UserClockList
+            }
+        ]
+    },
+    {
         path:'/admin',
         component:AdminLayout,
         routes:[
@@ -30,28 +51,8 @@ export default [
                 component:AdminClockList
             }
         ]
+    },
 
-    },
-    {
-        path:'/user',
-        component:UserLayout,
-        routes:[
-            {   path:'/user',
-                exact:true,
-                render: () => {
-                    return <Redirect to={'/user/control'}></Redirect>
-                },
-            },
-            {
-                path: '/user/control',
-                componet:UserControl
-            },
-            {
-                path:'/user/list/clock',
-                component:UserClockList
-            }
-        ]
-    },
     {
         path:'/login',
         component:Login

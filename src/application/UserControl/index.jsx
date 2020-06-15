@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Index = function (){
+const App = function () {
     return <div>
-        UserControl
+        userControl
     </div>
 }
 
-export default Index;
+export default App;
