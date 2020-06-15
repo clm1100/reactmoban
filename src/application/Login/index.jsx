@@ -2,7 +2,7 @@ import React from 'react';
 
 const Index = function (){
     return <div>
-        AdminClockList
+        Login
     </div>
 }
 

@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {renderRoutes} from 'react-router-config';
 import route from "./routes/index";
+import {HashRouter} from 'react-router-dom'
 function App(props) {
     
-    return <div>
+    return <HashRouter>
         {renderRoutes(route)}
-    </div>
+    </HashRouter>
 }
 
 export default App;

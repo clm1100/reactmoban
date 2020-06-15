@@ -1,7 +1,13 @@
 import React from 'react';
 import {Redirect} from 'react-router-dom';
-import AdminLayout from '../layouts/Admin';
-import UserLayout from '../layouts/Admin';
+import AdminLayout from '../layouts/AdminLayout';
+import UserLayout from '../layouts/UserLayout';
+import AdminClockList from '../application/AdminClockList';
+import AdminControl from '../application/AdminControl';
+import UserControl from '../application/UserControl';
+import UserClockList from '../application/UserControl';
+import Home from '../application/Home';
+import Login from '../application/Login';
 
 export default [
     {
@@ -10,9 +16,9 @@ export default [
         routes:[
             {
                 path:'/admin',
-                exact:'ture',
+                exact: true,
                 render:()=>{
-                    <Redireact to={'/admin/control'}></Redireact>
+                    return <Redirect to={'/admin/control'}></Redirect>
                 }
             },
             {
@@ -28,11 +34,14 @@ export default [
     },
     {
         path:'/user',
-        exact:'true',
-        render:()=>{
-            return <Redirect to={'/user/control'}></Redirect>
-        },
+        component:UserLayout,
         routes:[
+            {   path:'/user',
+                exact:true,
+                render: () => {
+                    return <Redirect to={'/user/control'}></Redirect>
+                },
+            },
             {
                 path: '/user/control',
                 componet:UserControl

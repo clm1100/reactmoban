@@ -1,10 +1,10 @@
-import { React } from 'react';
-import {route} from '../../routes/index';
+import React from 'react';
 import {renderRoutes} from 'react-router-config'
-const Index = function ({routes}){
+const Index = function (props){
+    const { route } = props
     return <div>
         <h1>AdminLayout</h1>
-        {renderRoutes(routes)}
+        {renderRoutes(route.routes)}
     </div>
 }
 
