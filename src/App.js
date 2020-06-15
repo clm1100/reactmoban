@@ -1,26 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+function App(props) {
+    const [isOnline, setIsOnline] = useState(null);
+    let onClick = ()=>{
+        setIsOnline(true)
+        console.log("click")
+    }
+    useEffect(() => {
+
+        console.log("123")
+        return function cleanup() {
+            console.log("执行clean")
+        };
+    });
+
+    if (isOnline === null) {
+        return <div onClick={onClick}>1111</div>
+    }
+
+    return isOnline ? <div onClick={onClick}>1111</div> : <div onClick={onClick}>22222</div>;
 }
 
 export default App;
