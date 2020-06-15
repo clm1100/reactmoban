@@ -8,6 +8,7 @@ import UserControl from '../application/UserControl';
 import UserClockList from '../application/UserControl';
 import Home from '../application/Home';
 import Login from '../application/Login';
+import List from '../application/Login';
 
 export default [
     {
@@ -49,6 +50,10 @@ export default [
             {
                 path:'/user/list/clock',
                 component:UserClockList
+            },
+            {
+                path:'/user/list',
+                component:List
             }
         ]
     },
