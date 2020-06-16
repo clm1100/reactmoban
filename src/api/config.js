@@ -1,5 +1,8 @@
 import axios from 'axios';
 const baseURL ='https://cnodejs.org/api/v1'
+const CancelToken = axios.CancelToken;
+const source = CancelToken.source()
+const {token,cancel} = source;
 const axiosInstance = axios.create({
     baseURL
 })

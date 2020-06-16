@@ -14,7 +14,6 @@ const Index = function (props){
 
     const goodslistJS = goodslist ? goodslist.toJS():{};
     const { data: gooddata } = goodslistJS
-    console.log(goodslistJS)
 
     return <div>
         AdminClockList{askdata && askdata.length} ||{gooddata && gooddata.length}

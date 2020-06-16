@@ -24,7 +24,6 @@ export const asyncChangeAsks = (params)=>{
 export const asyncChangeGoods = (params)=>{
     return (dispatch)=>{
         getGoods().then(data=>{
-            console.log("actions:",data)
             dispatch(changeGoods(data))
         }).catch(err=>{
             console.log("数据传输错误")

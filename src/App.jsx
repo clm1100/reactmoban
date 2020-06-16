@@ -5,7 +5,6 @@ import {HashRouter} from 'react-router-dom';
 import {Provider} from 'react-redux'
 import store from './store/index'
 function App(props) {
-    console.log(renderRoutes(route))
     return <Provider store={store}>
         <HashRouter>
             {renderRoutes(route)}
