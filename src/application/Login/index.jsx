@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const Index = function (){
+function Index(props={name:'张三',age:"18"}) {
+    console.log(props);
+    const {name,age} = props;
     return <div>
-        Login
+        {name}||{age}
     </div>
 }
+
 
 export default Index;
