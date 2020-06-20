@@ -1,63 +1,49 @@
 import React, { useState, useEffect, Component, useRef} from 'react';
 import axios from 'axios'
 import {Link} from 'react-router-dom'
-import { axiosInstance} from '../../api/config'
-window.arr1 = [];
-window.arr2 = [];
-window.arr3 = [];
-
 const Index = function (){
-    let [a,setA] = useState('')
-    let [arr,setArr] = useState('')
-    const [source1,setSource1] = useState('');
-    const countPlusThree = ()=>{
-        setA(a+1);
-        setTimeout(() => {
-            console.log(a)
-        }, 500);
-    }
-    useEffect(()=>{
-        var CancelToken = axios.CancelToken;
-        var source = CancelToken.source();
-        axios.get("https://cnodejs.org/api/v1/topics", { cancelToken: source.token}).then(data=>{
-            setArr(data)
-        }).catch(e=>{
+    let [arr,setArr] = useState('');
+    var CancelToken = axios.CancelToken;
+    var source = CancelToken.source();
+    let Click = ()=>{
+        axios.get("https://cnodejs.org/api/v1/topics", { cancelToken: source.token }).then(data => {
+            setArr(data.data.data);
+            console.log("2222");
+        }).catch(e => {
             console.log(e)
         })
+    }
+    useEffect(()=>{
         return ()=>{
             console.log("quxiaole")
             source.cancel()
         }
     },[])
-    window.arr1.push(countPlusThree)
-    const numRef = useRef(a);
-    numRef.current = a;
-    window.arr3.push(numRef)
     return <div>
-        <p>{} has clicked  <strong>{a}</strong> Times </p>
+        <p>{arr.length} </p>
+        <button onClick={Click}>Click</button>
         <Link to={'/admin/list/clock'}>首页</Link>
-        <button onClick={countPlusThree}>Click*3</button>
     </div>
 }
 
  class Two extends Component{
     constructor(props){
         super(props)
+        // 1、调用axios.CancelToken.source()方法生成source实例;
         var CancelToken = axios.CancelToken;
         var source = CancelToken.source();
-        this.source = source;
         this.state = {
-            a:110,
-            arr:'',
-            ...source
+            source,
+            arr:''
         }
     }
-    countPlusThree=()=> {
-        let {token} = this.state
-        console.log("penging...")
+    click=()=> {
+        let { token } = this.state.source
+        // 2、将source.token以cancelToken参数形式传入axios的请求中;
         axios.get("https://cnodejs.org/api/v1/topics", { cancelToken: token }).then(data => {
             this.setState({
-                arr:data
+                arr:data,
+                loading:'加载完成'
             })
             console.log(data);
         }).catch(e => {
@@ -65,15 +51,42 @@ const Index = function (){
         })
      }
      componentWillUnmount(){
-         const {cancel} = this.state;
-        //  cancel("销毁了")
+        //  3、在组件即将卸载时取消当前组件的所有异步任务
+         const { cancel } = this.state.source;
+         cancel("销毁了")
      }
     render(){
-        window.arr2.push(this.countPlusThree)
         let {a} = this.state
         return <div>
             <p>{} has clicked  <strong>{a}</strong> Times </p>
-            <button onClick={this.countPlusThree}>Click*3</button>
+            <button onClick={this.click}>Click</button>
+            <Link to={'/admin/list/clock'}>首页</Link>
+        </div>
+    }
+}
+
+
+class Three extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            arr: ''
+        }
+    }
+    click = () => {
+        axios.get("https://cnodejs.org/api/v1/topics").then(data => {
+            this.setState({
+                arr: data.data,
+            })
+        }).catch(e => {
+            console.log(e)
+        })
+    }
+    render() {
+        let {arr} = this.state;
+        return <div>
+            <p>{arr.length} </p>
+            <button onClick={this.click}>Click</button>
             <Link to={'/admin/list/clock'}>首页</Link>
         </div>
     }
@@ -84,7 +97,12 @@ let App = function(){
     return <div>
         <Index></Index>
         <Two></Two>
+        <Three></Three>
     </div>
 }
 
 export default App;
+
+
+
+
